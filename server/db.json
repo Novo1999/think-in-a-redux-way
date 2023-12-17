@@ -1,24 +1,6 @@
 {
   "books": [
     {
-      "name": "Slow Horses (Deluxe Edition)",
-      "author": "Mick Herron",
-      "thumbnail": "https://m.media-amazon.com/images/I/51Ga5GuElyL._SX331_BO1,204,203,200_.jpg",
-      "price": 14,
-      "rating": 3,
-      "featured": false,
-      "id": 1
-    },
-    {
-      "name": "The Last Thing He Told Me: A Novel",
-      "author": "Laura Dave",
-      "thumbnail": "https://m.media-amazon.com/images/P/1501171348.01._SCLZZZZZZZ_SX500_.jpg",
-      "price": 13.99,
-      "rating": 4,
-      "featured": false,
-      "id": 2
-    },
-    {
       "name": "Eloquent JavaScript, 3rd Edition",
       "author": "Marijn Haverbeke",
       "thumbnail": "https://m.media-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
@@ -26,6 +8,24 @@
       "rating": 4,
       "featured": true,
       "id": 4
+    },
+    {
+      "id": "b78bcbdc-9f83-4023-ad12-1c8ce7f40f3a",
+      "name": "test book",
+      "author": "test author",
+      "thumbnail": "https://m.media-amazon.com/images/I/81jXpXp-DeL._SL1500_.jpg",
+      "price": 25,
+      "rating": 4,
+      "featured": true
+    },
+    {
+      "id": "de6d4fec-5ffb-4067-83f0-61585fd1bc72",
+      "name": "Eat that frog",
+      "author": "Brian tracy",
+      "thumbnail": "https://m.media-amazon.com/images/I/81pDx9j+xQL._SL1500_.jpg",
+      "price": 73,
+      "rating": 5,
+      "featured": false
     }
   ]
 }
