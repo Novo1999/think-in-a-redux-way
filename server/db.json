@@ -48,6 +48,49 @@
       "role": "student",
       "name": "Arif",
       "id": 7
+    },
+    {
+      "email": "neptune.navo@gmail.com",
+      "password": "$2a$10$ptJOuFJ6E7TgR4Uem792UODWwBgHlWBXjgss1fOn5FuGTlIzmPRmC",
+      "name": "dawdawd",
+      "role": "student",
+      "confirmedPassword": "test",
+      "id": 8
+    },
+    {
+      "email": "novo@gmail.com",
+      "password": "$2a$10$lbaLT9tOR.pQoZYlnnH2pOlQNae8QionDHBlgSItDWtXeN3a8yMFO",
+      "name": "Novodip Mondal Rony",
+      "role": "student",
+      "id": 9
+    },
+    {
+      "email": "neptune@gmail.com",
+      "password": "$2a$10$M2WGYLI3GPYEjraLnunpfeS3JHRi8TWscTPAEZuGwHiCXyHl/9btq",
+      "name": "Novodip Mondal Rony",
+      "role": "student",
+      "id": 10
+    },
+    {
+      "email": "saad@gmail.com",
+      "password": "$2a$10$kSRq3bXcX3tfCLwiWuq3VOB/TW/4AB4HMC5WpThNsuND.Ku0.K4OC",
+      "name": "Novodip Mondal Rony",
+      "role": "student",
+      "id": 11
+    },
+    {
+      "email": "novo12@gmail.com",
+      "password": "$2a$10$0ZRQwi9I/LDluNTwQcY0.u45F6aRpAqZWT/prw3DMgiAtwMoxEu/6",
+      "name": "test",
+      "role": "student",
+      "id": 12
+    },
+    {
+      "email": "neptune123@gmail.com",
+      "password": "$2a$10$93uJz65mvyyHokhbE4bLDOSgJBJbo.ZZhMBDjBi6P5OhCIhrUPan2",
+      "name": "Novodip Mondal Rony",
+      "role": "student",
+      "id": 13
     }
   ],
   "videos": [
