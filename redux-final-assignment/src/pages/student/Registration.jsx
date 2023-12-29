@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import {
   useCheckUserQuery,
   useRegisterUserMutation,
-} from '../features/auth/authApi'
+} from '../../features/auth/authApi'
 import { Link, useNavigate } from 'react-router-dom'
-import { isValidEmail } from '../utils/isValidEmail'
+import { isValidEmail } from '../../utils/isValidEmail'
 
 const initialState = {
   name: '',

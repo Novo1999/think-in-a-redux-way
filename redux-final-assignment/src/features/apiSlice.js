@@ -1,12 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { BASE_URL } from '../../utils/constant'
-import { loggedOutUser } from './authSlice'
+import { BASE_URL } from '../utils/constant'
+import { loggedOutUser } from './auth/authSlice'
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
   prepareHeaders: async (headers, { getState, endpoint }) => {
     const token = getState()?.studentAuth?.accessToken
-    console.log(token)
     if (token) {
       headers.set('Authorization', `Bearer ${token}`)
     }

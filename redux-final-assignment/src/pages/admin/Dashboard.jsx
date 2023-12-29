@@ -1,4 +1,5 @@
-import Nav from '../components/Admin/Nav'
+import { Link } from 'react-router-dom'
+import Nav from '../../components/Admin/Nav'
 
 const Dashboard = () => {
   return (
@@ -14,7 +15,7 @@ const Dashboard = () => {
         <div className='mx-auto max-w-7xl px-5 lg:px-0'>
           <div className='px-3 md:lg:xl:px-40  py-20 bg-opacity-10'>
             <div className='grid grid-cols-1 md:grid-cols-2  gap-6 p-8'>
-              <a href='./Videos.html' className='dashboard-item-card'>
+              <Link to='/videos' className='dashboard-item-card'>
                 <svg
                   fill='none'
                   viewBox='0 0 24 24'
@@ -28,8 +29,8 @@ const Dashboard = () => {
                   />
                 </svg>
                 <p className='text-slate-200 mt-3 '>Videos</p>
-              </a>
-              <a href='./Assignment.html' className='dashboard-item-card'>
+              </Link>
+              <Link to='/assignment' className='dashboard-item-card'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   fill='none'
@@ -45,8 +46,8 @@ const Dashboard = () => {
                   />
                 </svg>
                 <p className='text-slate-200 mt-3'>Assignment</p>
-              </a>
-              <a href='./Quizzes.html' className='dashboard-item-card'>
+              </Link>
+              <Link to='/quizzes' className='dashboard-item-card'>
                 <svg
                   fill='none'
                   viewBox='0 0 24 24'
@@ -61,8 +62,8 @@ const Dashboard = () => {
                   />
                 </svg>
                 <p className='text-slate-200 mt-3 '>Quizzes</p>
-              </a>
-              <a href='./AssignmentMark.html' className='dashboard-item-card'>
+              </Link>
+              <Link to='/assignment-mark' className='dashboard-item-card'>
                 <svg
                   viewBox='0 0 24 24'
                   strokeWidth='1.5'
@@ -76,7 +77,7 @@ const Dashboard = () => {
                   />
                 </svg>
                 <p className='text-slate-200 mt-3 '>Assignment Mark</p>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

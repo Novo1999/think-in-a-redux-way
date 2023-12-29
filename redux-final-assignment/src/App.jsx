@@ -1,16 +1,26 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import './App.css'
-import Layout from './pages/Layout'
-import Portal from './pages/Portal'
-import Login from './pages/Login'
+import Layout from './pages/student/Layout'
+import Portal from './pages/student/Portal'
+import Login from './pages/student/Login'
 import { Provider } from 'react-redux'
 import { store } from './features/app/store'
-import CoursePlayer from './pages/CoursePlayer'
-import Registration from './pages/Registration'
-import AdminLogin from './pages/AdminLogin'
-import Dashboard from './pages/Dashboard'
+import CoursePlayer from './pages/student/CoursePlayer'
+import Registration from './pages/student/Registration'
+import AdminLogin from './pages/admin/AdminLogin'
+import Dashboard from './pages/admin/Dashboard'
 import StudentPrivateRoute from './components/Student/PrivateRoute'
 import AdminPrivateRoute from './components/Admin/PrivateRoute'
+import Leaderboard from './pages/admin/Leaderboard'
+import Quiz from './pages/student/Quiz'
+import Assignment from './pages/admin/Assignments'
+import AssignmentMark from './pages/admin/AssignmentMark'
+import Quizzes from './pages/admin/Quizzes'
+import Videos from './pages/admin/Videos'
+import AddVideo from './pages/admin/AddVideo'
+import EditVideo from './pages/admin/EditVideo'
+import AddAssignment from './pages/admin/AddAssignment'
+import EditAssignment from './pages/admin/EditAssignment'
 
 const router = createBrowserRouter([
   {
@@ -39,6 +49,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/leaderboard',
+        element: (
+          <StudentPrivateRoute>
+            <Leaderboard />
+          </StudentPrivateRoute>
+        ),
+      },
+      {
+        path: '/quiz',
+        element: (
+          <StudentPrivateRoute>
+            <Quiz />
+          </StudentPrivateRoute>
+        ),
+      },
+      {
         path: '/admin-login',
         element: <AdminLogin />,
       },
@@ -47,6 +73,70 @@ const router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <Dashboard />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/assignment',
+        element: (
+          <AdminPrivateRoute>
+            <Assignment />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/assignment-mark',
+        element: (
+          <AdminPrivateRoute>
+            <AssignmentMark />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/quizzes',
+        element: (
+          <AdminPrivateRoute>
+            <Quizzes />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/videos',
+        element: (
+          <AdminPrivateRoute>
+            <Videos />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/add-video',
+        element: (
+          <AdminPrivateRoute>
+            <AddVideo />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/edit-video/:id',
+        element: (
+          <AdminPrivateRoute>
+            <EditVideo />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/add-assignment',
+        element: (
+          <AdminPrivateRoute>
+            <AddAssignment />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/edit-assignment/:id',
+        element: (
+          <AdminPrivateRoute>
+            <EditAssignment />
           </AdminPrivateRoute>
         ),
       },

@@ -1,23 +1,22 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { isValidEmail } from '../utils/isValidEmail'
+import { isValidEmail } from '../../utils/isValidEmail'
 import { useEffect, useState } from 'react'
-import { useLoginUserMutation } from '../features/auth/authApi'
-
-const Login = () => {
+import { useLoginAdminMutation } from '../../features/auth/authApi'
+const AdminLogin = () => {
   const navigate = useNavigate()
   const userExists = JSON.parse(localStorage.getItem('token'))
   const [inputValue, setInputValue] = useState({ email: '', password: '' })
-  const [login, { data, isError, error }] = useLoginUserMutation()
+  const [login, { data, isError, error }] = useLoginAdminMutation()
 
   useEffect(() => {
-    if (userExists && userExists?.user?.role === 'student') {
-      navigate('/course')
+    if (userExists && userExists?.user?.role === 'admin') {
+      navigate('/dashboard')
     }
   }, [userExists, navigate])
 
   useEffect(() => {
-    if (data?.accessToken && data?.user?.role === 'student') {
-      navigate('/course')
+    if (data?.accessToken && data?.user?.role === 'admin') {
+      navigate('/dashboard')
     }
   }, [data, navigate])
 
@@ -33,16 +32,15 @@ const Login = () => {
       <meta charSet='UTF-8' />
       <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
       <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-      <title>Student Login</title>
+      <title>Admin Login</title>
       {/* Tailwind css */}
       {/*  */}
-      <link rel='stylesheet' href='../style/output.css' />
       <section className='py-6 bg-primary h-screen grid place-items-center'>
         <div className='mx-auto max-w-md px-5 lg:px-0'>
           <div>
             <img className='h-12 mx-auto' src='/learningportal.svg' />
             <h2 className='mt-6 text-center text-3xl font-extrabold text-slate-100'>
-              Sign in to Student Account
+              Sign in to Admin Account
             </h2>
           </div>
           <form className='mt-8 space-y-6' onClick={handleSubmit}>
@@ -86,18 +84,10 @@ const Login = () => {
             <div className='flex items-center gap-6 justify-end'>
               <div className='text-sm'>
                 <Link
-                  to='/admin-login'
+                  to='/'
                   className='font-medium text-violet-200 hover:text-violet-500'
                 >
-                  I am an admin
-                </Link>
-              </div>
-              <div className='text-sm'>
-                <Link
-                  to='/create-new-account'
-                  className='font-medium text-violet-600 hover:text-violet-500'
-                >
-                  Create New Account
+                  I am a student
                 </Link>
               </div>
             </div>
@@ -116,4 +106,4 @@ const Login = () => {
     </>
   )
 }
-export default Login
+export default AdminLogin
