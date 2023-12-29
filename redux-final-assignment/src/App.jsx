@@ -7,6 +7,10 @@ import { Provider } from 'react-redux'
 import { store } from './features/app/store'
 import CoursePlayer from './pages/CoursePlayer'
 import Registration from './pages/Registration'
+import AdminLogin from './pages/AdminLogin'
+import Dashboard from './pages/Dashboard'
+import StudentPrivateRoute from './components/Student/PrivateRoute'
+import AdminPrivateRoute from './components/Admin/PrivateRoute'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +32,23 @@ const router = createBrowserRouter([
       },
       {
         path: '/course',
-        element: <CoursePlayer />,
+        element: (
+          <StudentPrivateRoute>
+            <CoursePlayer />
+          </StudentPrivateRoute>
+        ),
+      },
+      {
+        path: '/admin-login',
+        element: <AdminLogin />,
+      },
+      {
+        path: '/dashboard',
+        element: (
+          <AdminPrivateRoute>
+            <Dashboard />
+          </AdminPrivateRoute>
+        ),
       },
     ],
   },

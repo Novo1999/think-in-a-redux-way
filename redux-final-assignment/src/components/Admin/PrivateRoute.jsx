@@ -6,9 +6,9 @@ const PrivateRoute = ({ children }) => {
   const userExists = JSON.parse(localStorage.getItem('token'))
 
   useEffect(() => {
-    // making student route private for admins
-    if (!userExists || userExists?.user?.role === 'admin') {
-      navigate('/')
+    // making admin route private for students
+    if (!userExists || userExists?.user?.role === 'student') {
+      navigate('/admin-login')
     }
   }, [userExists, navigate])
 

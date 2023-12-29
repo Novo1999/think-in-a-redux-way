@@ -1,24 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { loggedOutUser } from '../../../features/auth/authSlice'
-
+import { loggedOutUser } from '../../features/auth/authSlice'
 const Nav = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const handleLogOut = () => {
     dispatch(loggedOutUser())
-    navigate('/')
+    navigate('/admin-login')
   }
+
   return (
     <nav className='shadow-md'>
       <div className='max-w-7xl px-5 lg:px-0 mx-auto flex justify-between py-3'>
         <img className='h-10' src='/learningportal.svg' />
         <div className='flex items-center gap-3'>
-          <a href='./Leaderboard.html'>Leaderboard</a>
-          <h2 className='font-bold'>Saad Hasan</h2>
+          <h2 className='font-bold'>Admin</h2>
           <button
             onClick={handleLogOut}
-            className='flex gap-2 border border-cyan items-center px-4 py-1 rounded-full text-sm transition-all hover:bg-cyan'
+            className='flex gap-2 items-center px-4 py-1 rounded-full text-sm transition-all bg-red-600 hover:bg-red-700 font-medium'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'

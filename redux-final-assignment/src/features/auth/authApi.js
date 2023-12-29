@@ -1,4 +1,4 @@
-import { apiSlice } from '../apiSlice'
+import { apiSlice } from './apiSlice'
 import { loggedInUser } from './authSlice'
 
 export const authApi = apiSlice.injectEndpoints({
@@ -37,8 +37,29 @@ export const authApi = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled
           console.log(data)
-          dispatch(loggedInUser(data))
-          localStorage.setItem('token', JSON.stringify(data))
+          if (data?.user?.role === 'student') {
+            dispatch(loggedInUser(data))
+            localStorage.setItem('token', JSON.stringify(data))
+          }
+        } catch (error) {
+          console.log(error)
+        }
+      },
+    }),
+    loginAdmin: builder.mutation({
+      query: (data) => ({
+        url: `/login`,
+        method: 'POST',
+        body: data,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled
+          console.log(data)
+          if (data?.user?.role === 'admin') {
+            dispatch(loggedInUser(data))
+            localStorage.setItem('token', JSON.stringify(data))
+          }
         } catch (error) {
           console.log(error)
         }
@@ -51,4 +72,5 @@ export const {
   useRegisterUserMutation,
   useCheckUserQuery,
   useLoginUserMutation,
+  useLoginAdminMutation,
 } = authApi
