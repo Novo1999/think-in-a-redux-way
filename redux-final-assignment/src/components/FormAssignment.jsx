@@ -6,12 +6,16 @@ import {
   useAddAssignmentMutation,
   useGetAssignmentsQuery,
 } from '../features/admin/assignment/assignmentApi'
-import { useGetVideosQuery } from '../features/admin/videos/videosApi'
+import {
+  useGetVideoQuery,
+  useGetVideosQuery,
+} from '../features/admin/videos/videosApi'
 
 const initialState = {
   title: '',
   totalMark: '',
   video_title: '',
+  video_id: '',
 }
 
 const FormAssignment = () => {
@@ -21,14 +25,22 @@ const FormAssignment = () => {
   const [addAssignment, { isLoading, isError }] = useAddAssignmentMutation()
   const { data: assignments } = useGetAssignmentsQuery()
   const { data: videos } = useGetVideosQuery()
+  const [selectedVideo, setSelectedVideo] = useState(null)
+  const { data: video } = useGetVideoQuery(selectedVideo, {
+    skip: selectedVideo === null,
+  })
+
+  console.log(assignmentInfo)
+
+  useEffect(() => {
+    if (video?.id) {
+      setAssignmentInfo({ ...assignmentInfo, video_id: video.id })
+    }
+  }, [video, setAssignmentInfo])
 
   useEffect(() => {
     setAssignmentInfo({ ...assignmentInfo, video_title: videos?.at(0)?.title })
   }, [videos])
-
-  console.log(assignments?.length)
-
-  console.log(assignmentInfo)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -78,18 +90,19 @@ const FormAssignment = () => {
             </div>
             <label htmlFor='video-title'>Video Title</label>
             <select
-              onChange={(e) =>
+              onChange={(e) => {
                 setAssignmentInfo({
                   ...assignmentInfo,
-                  video_title: e.target.value,
+                  video_title: videos.find((el) => el.id === +e.target.value)
+                    ?.title,
                 })
-              }
-              value={videoTitle}
+                setSelectedVideo(+e.target.value)
+              }}
               style={{ color: 'black' }}
               name='video-title'
             >
               {videos?.map((vid) => (
-                <option key={vid.id} value={vid.title}>
+                <option key={vid.id} value={vid.id}>
                   {vid.title}
                 </option>
               ))}

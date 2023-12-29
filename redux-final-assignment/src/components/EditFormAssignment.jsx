@@ -23,30 +23,22 @@ const EditFormAssignment = () => {
   const { data: assignments } = useGetAssignmentsQuery()
   const { data: assignment } = useGetAssignmentQuery(id)
   const { data: videos } = useGetVideosQuery()
+  console.log(videos)
 
-  // console.log(assignment)
-
+  console.log(videos)
   useEffect(() => {
     setAssignmentInfo({
       ...assignmentInfo,
       video_title: assignment?.video_title || '',
       totalMark: assignment?.totalMark || '',
       title: assignment?.title || '',
+      id: assignment?.id || '',
     })
   }, [assignment])
 
-  // console.log(assignmentInfo)
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    const assignmentInfoCopy = Object.assign({}, assignmentInfo)
-
-    // dynamically increasing the assignment number
-    assignmentInfoCopy.title = `Assignment ${assignments?.length + 1} - ${
-      assignmentInfo.title
-    }`
-
-    editAssignment(assignmentInfoCopy)
+    editAssignment({ id, data: assignmentInfo })
     if (!isLoading && !isError) {
       navigate('/assignment')
     }
@@ -95,20 +87,11 @@ const EditFormAssignment = () => {
               name='video-title'
             >
               {videos?.map((vid) => {
-                if (vid.id === assignment?.video_id) {
-                  return (
-                    <option key={vid.id} value={vid.title}>
-                      {assignment?.video_title}
-                    </option>
-                  )
-                }
-                if (vid.id !== assignment?.video_id) {
-                  return (
-                    <option key={vid.id} value={vid.title}>
-                      {vid.title}
-                    </option>
-                  )
-                }
+                return (
+                  <option key={vid.id} value={vid.title}>
+                    {vid.title}
+                  </option>
+                )
               })}
             </select>
           </div>

@@ -15,6 +15,8 @@ const Assignment = () => {
   } = useGetAssignmentsQuery()
   const [deleteAssignment] = useDeleteAssignmentMutation()
 
+  console.log(assignments)
+
   const handleDelete = (id) => {
     deleteAssignment(id)
   }
@@ -45,7 +47,6 @@ const Assignment = () => {
   }
   if (!isLoading && !isError && assignments.length > 0) {
     content = assignments?.map((ass) => {
-      console.log(ass)
       const {
         title,
         video_title: videoTitle,
