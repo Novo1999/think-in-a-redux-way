@@ -10,6 +10,8 @@ import {
   useGetVideoQuery,
   useGetVideosQuery,
 } from '../features/admin/videos/videosApi'
+import { changeIsCorrect } from '../utils/changeIsCorrect'
+import { changeOption } from '../utils/changeOption'
 
 const initialState = {
   id: '',
@@ -17,37 +19,6 @@ const initialState = {
   video_title: '',
   options: [],
   video_id: '',
-}
-
-const changeOption = (prevQuizInfo, e, optionNum) => {
-  const newOption = e.target.value
-  const updatedOptions = prevQuizInfo.options.map((option, index) => {
-    if (index === optionNum) {
-      return { ...option, option: newOption }
-    } else {
-      return option
-    }
-  })
-
-  return {
-    ...prevQuizInfo,
-    options: updatedOptions,
-  }
-}
-
-const changeIsCorrect = (prevQuizInfo, optionNum) => {
-  const updatedOptions = prevQuizInfo.options.map((option, index) => {
-    if (index === optionNum) {
-      return { ...option, isCorrect: true }
-    } else {
-      return option
-    }
-  })
-
-  return {
-    ...prevQuizInfo,
-    options: updatedOptions,
-  }
 }
 
 const EditFormQuiz = () => {
@@ -64,8 +35,6 @@ const EditFormQuiz = () => {
     skip: selectedVideo === null,
   })
 
-  console.log(quiz)
-
   useEffect(() => {
     if (quiz) setSelectedVideo(quiz.video_id)
   }, [quiz])
@@ -74,33 +43,26 @@ const EditFormQuiz = () => {
     if (quiz) {
       setQuizInfo({
         video_title: video?.title,
-        video_id: quiz.video_id,
+        video_id: video?.id,
         id: quiz.id,
         question: quiz.question,
         options: quiz.options,
       })
     }
-  }, [quiz, video])
+  }, [quiz])
 
   useEffect(() => {
     const correctAns = options?.find((opt) => opt.isCorrect === true)
-    setCorrectAns(correctAns?.id)
+    setCorrectAns(+correctAns?.id)
   }, [options])
 
-  console.log(correctAns)
-
   useEffect(() => {
-    if (correctAns === 'A') {
-      return setQuizInfo((prevQuizInfo) => changeIsCorrect(prevQuizInfo, 0))
-    }
-    if (correctAns === 'B') {
-      return setQuizInfo((prevQuizInfo) => changeIsCorrect(prevQuizInfo, 1))
-    }
-    if (correctAns === 'C') {
-      return setQuizInfo((prevQuizInfo) => changeIsCorrect(prevQuizInfo, 2))
-    }
-    if (correctAns === 'D') {
-      return setQuizInfo((prevQuizInfo) => changeIsCorrect(prevQuizInfo, 3))
+    const options = ['A', 'B', 'C', 'D']
+
+    for (let i = 0; i < options.length; i++) {
+      if (correctAns === options[i]) {
+        return setQuizInfo((prevQuizInfo) => changeIsCorrect(prevQuizInfo, i))
+      }
     }
   }, [correctAns])
 
@@ -126,11 +88,10 @@ const EditFormQuiz = () => {
                 }
               />
             </div>
-            {console.log(options)}
             <div className='col-span-6'>
               <TextArea
                 title='Option - 1'
-                value={options[0]?.option}
+                value={options?.at(0)?.option}
                 onChange={(e) =>
                   setQuizInfo((prevQuizInfo) =>
                     changeOption(prevQuizInfo, e, 0)
@@ -149,7 +110,7 @@ const EditFormQuiz = () => {
             <div className='col-span-6'>
               <TextInput
                 title='Option - 2'
-                value={options[1]?.option}
+                value={options?.at(1)?.option || ''}
                 onChange={(e) =>
                   setQuizInfo((prevQuizInfo) =>
                     changeOption(prevQuizInfo, e, 1)
@@ -168,7 +129,7 @@ const EditFormQuiz = () => {
             <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
               <TextInput
                 title='Option - 3'
-                value={options[2]?.option}
+                value={options?.at(2)?.option || ''}
                 onChange={(e) =>
                   setQuizInfo((prevQuizInfo) =>
                     changeOption(prevQuizInfo, e, 2)
@@ -187,7 +148,7 @@ const EditFormQuiz = () => {
             <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
               <TextInput
                 title='Option - 4'
-                value={options[3]?.option}
+                value={options?.at(3)?.option || ''}
                 onChange={(e) =>
                   setQuizInfo((prevQuizInfo) =>
                     changeOption(prevQuizInfo, e, 3)
@@ -202,7 +163,6 @@ const EditFormQuiz = () => {
                 checked={Number(correctAns) === 4}
               />
             </div>
-
             <div>
               <label style={{ marginRight: '20px' }} htmlFor='video-title'>
                 Video Title
@@ -217,6 +177,7 @@ const EditFormQuiz = () => {
                   setQuizInfo((prevQuizInfo) => ({
                     ...prevQuizInfo,
                     video_title: selectedVideo?.title,
+                    video_id: selectedVideoId,
                   }))
 
                   setSelectedVideo(selectedVideoId)
