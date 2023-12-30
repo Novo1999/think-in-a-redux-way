@@ -21,6 +21,8 @@ import AddVideo from './pages/admin/AddVideo'
 import EditVideo from './pages/admin/EditVideo'
 import AddAssignment from './pages/admin/AddAssignment'
 import EditAssignment from './pages/admin/EditAssignment'
+import AddQuiz from './pages/admin/AddQuiz'
+import EditFormQuiz from './components/EditFormQuiz'
 
 const router = createBrowserRouter([
   {
@@ -121,6 +123,38 @@ const router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <EditVideo />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/add-assignment',
+        element: (
+          <AdminPrivateRoute>
+            <AddAssignment />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/edit-assignment/:id',
+        element: (
+          <AdminPrivateRoute>
+            <EditAssignment />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/add-quiz',
+        element: (
+          <AdminPrivateRoute>
+            <AddQuiz />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: '/edit-quiz/:id',
+        element: (
+          <AdminPrivateRoute>
+            <EditFormQuiz />
           </AdminPrivateRoute>
         ),
       },

@@ -4,9 +4,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 import {
   useEditAssignmentMutation,
   useGetAssignmentQuery,
-  useGetAssignmentsQuery,
 } from '../features/admin/assignment/assignmentApi'
-import { useGetVideosQuery } from '../features/admin/videos/videosApi'
+import {
+  useGetVideoQuery,
+  useGetVideosQuery,
+} from '../features/admin/videos/videosApi'
 
 const initialState = {
   title: '',
@@ -18,14 +20,28 @@ const EditFormAssignment = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [assignmentInfo, setAssignmentInfo] = useState(initialState)
-  const { title, totalMark, video_title: videoTitle } = assignmentInfo
+  const { title, totalMark } = assignmentInfo
   const [editAssignment, { isLoading, isError }] = useEditAssignmentMutation()
-  const { data: assignments } = useGetAssignmentsQuery()
   const { data: assignment } = useGetAssignmentQuery(id)
   const { data: videos } = useGetVideosQuery()
-  console.log(videos)
+  const [selectedVideo, setSelectedVideo] = useState(null)
+  const { data: video } = useGetVideoQuery(selectedVideo, {
+    skip: selectedVideo === null,
+  })
 
-  console.log(videos)
+  useEffect(() => {
+    if (assignment?.video_id) {
+      console.log(assignment.video_id)
+      setSelectedVideo(assignment?.video_id)
+    }
+  }, [assignment])
+
+  useEffect(() => {
+    if (video?.id) {
+      setAssignmentInfo({ ...assignmentInfo, video_id: video.id })
+    }
+  }, [video, setAssignmentInfo])
+
   useEffect(() => {
     setAssignmentInfo({
       ...assignmentInfo,
@@ -75,24 +91,30 @@ const EditFormAssignment = () => {
               />
             </div>
             <label htmlFor='video-title'>Video Title</label>
+            {console.log(video?.title)}
             <select
-              onChange={(e) =>
-                setAssignmentInfo({
-                  ...assignmentInfo,
-                  video_title: e.target.value,
-                })
-              }
-              value={videoTitle}
+              onChange={(e) => {
+                const selectedVideoId = +e.target.value
+                const selectedVideo = videos.find(
+                  (el) => el.id === selectedVideoId
+                )
+
+                setAssignmentInfo((prevAssignmentInfo) => ({
+                  ...prevAssignmentInfo,
+                  video_title: selectedVideo?.title,
+                }))
+
+                setSelectedVideo(selectedVideoId)
+              }}
+              value={selectedVideo || ''}
               style={{ color: 'black' }}
               name='video-title'
             >
-              {videos?.map((vid) => {
-                return (
-                  <option key={vid.id} value={vid.title}>
-                    {vid.title}
-                  </option>
-                )
-              })}
+              {videos?.map((vid) => (
+                <option key={vid.id} value={vid.id}>
+                  {vid.title}
+                </option>
+              ))}
             </select>
           </div>
         </div>

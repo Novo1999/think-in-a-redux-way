@@ -135,15 +135,15 @@
     {
       "id": 1,
       "title": "Assignment 1 - Implement Debounce Function",
-      "video_id": 1,
+      "video_id": 2,
       "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "totalMark": 100
     },
     {
       "id": 2,
       "title": "Assignment 2 - Implement Best Practices",
-      "video_id": 2,
-      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_id": 4,
+      "video_title": "test",
       "totalMark": 100
     },
     {
@@ -155,18 +155,18 @@
     },
     {
       "title": "Assignment 5 - object assign",
-      "totalMark": "25",
-      "video_title": "JS object",
-      "video_id": 3,
+      "totalMark": "37",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_id": 2,
       "id": 5
     }
   ],
   "quizzes": [
     {
       "id": 1,
-      "question": "What is a Debounce function in JavaScript?",
+      "question": "What is a Debounce function in JavaScript?xd",
       "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
       "options": [
         {
           "id": "1",
@@ -194,7 +194,7 @@
       "id": 2,
       "question": "Which of the following is an example of a situation where you would use the Debounce function?",
       "video_id": 1,
-      "video_title": "Debounce Function in JavaScript - JavaScript Job Interview question",
+      "video_title": "JS object",
       "options": [
         {
           "id": "1",
@@ -219,32 +219,32 @@
       ]
     },
     {
-      "id": 3,
-      "question": "What is the difference between null and undefined in JavaScript?",
-      "video_id": 2,
-      "video_title": "#2 JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "question": "how are you?",
+      "video_title": "JavaScript Tips and Tricks - JavaScript Job Interview Questions",
+      "video_id": 3,
       "options": [
         {
+          "option": "a",
           "id": 1,
-          "option": "null represents the intentional absence of any object value.",
-          "isCorrect": true
+          "isCorrect": false
         },
         {
+          "option": "b",
           "id": 2,
-          "option": "undefined represents the uninitialized value of a variable or property.",
           "isCorrect": false
         },
         {
+          "option": "c",
           "id": 3,
-          "option": "Same thing",
           "isCorrect": false
         },
         {
+          "option": "d",
           "id": 4,
-          "option": "No Difference",
-          "isCorrect": false
+          "isCorrect": true
         }
-      ]
+      ],
+      "id": 3
     }
   ],
   "assignmentMark": [

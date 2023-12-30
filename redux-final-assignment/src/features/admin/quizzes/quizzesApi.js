@@ -1,16 +1,16 @@
 import { apiSlice } from '../../apiSlice'
 
-export const assignmentApi = apiSlice.injectEndpoints({
+export const quizzesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAssignments: builder.query({
-      query: () => '/assignments',
+    getQuizzes: builder.query({
+      query: () => '/quizzes',
     }),
-    getAssignment: builder.query({
-      query: (id) => `/assignments/${id}`,
+    getQuiz: builder.query({
+      query: (id) => `/quizzes/${id}`,
     }),
-    addAssignment: builder.mutation({
+    addQuiz: builder.mutation({
       query: (details) => ({
-        url: '/assignments',
+        url: '/quizzes',
         method: 'POST',
         body: details,
       }),
@@ -18,8 +18,8 @@ export const assignmentApi = apiSlice.injectEndpoints({
         try {
           const { data: addedVideo } = await queryFulfilled
           dispatch(
-            assignmentApi.util.updateQueryData(
-              'getAssignments',
+            quizzesApi.util.updateQueryData(
+              'getQuizzes',
               undefined,
               (draft) => {
                 return [...draft, addedVideo]
@@ -31,20 +31,16 @@ export const assignmentApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    deleteAssignment: builder.mutation({
+    deleteQuiz: builder.mutation({
       query: (id) => ({
-        url: `/assignments/${id}`,
+        url: `/quizzes/${id}`,
         method: 'DELETE',
       }),
       async onQueryStarted(id, { dispatch, queryFulfilled }) {
         const result = dispatch(
-          assignmentApi.util.updateQueryData(
-            'getAssignments',
-            undefined,
-            (draft) => {
-              return draft.filter((el) => el.id !== id)
-            }
-          )
+          quizzesApi.util.updateQueryData('getQuizzes', undefined, (draft) => {
+            return draft.filter((el) => el.id !== id)
+          })
         )
         try {
           await queryFulfilled
@@ -53,25 +49,21 @@ export const assignmentApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    editAssignment: builder.mutation({
+    editQuiz: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/assignments/${id}`,
+        url: `/quizzes/${id}`,
         method: 'PATCH',
         body: data,
       }),
       async onQueryStarted({ id, data }, { dispatch, queryFulfilled }) {
         const result = dispatch(
-          assignmentApi.util.updateQueryData(
-            'getAssignments',
-            undefined,
-            (draft) => {
-              const indexToUpdate = draft.findIndex((item) => item.id === +id)
-              draft[indexToUpdate] = data
-            }
-          )
+          quizzesApi.util.updateQueryData('getQuizzes', undefined, (draft) => {
+            const indexToUpdate = draft.findIndex((item) => item.id === +id)
+            draft[indexToUpdate] = data
+          })
         )
         dispatch(
-          assignmentApi.util.updateQueryData('getAssignment', id, (draft) => {
+          quizzesApi.util.updateQueryData('getQuiz', id, (draft) => {
             draft = data
             return draft
           })
@@ -87,9 +79,9 @@ export const assignmentApi = apiSlice.injectEndpoints({
 })
 
 export const {
-  useAddAssignmentMutation,
-  useDeleteAssignmentMutation,
-  useGetAssignmentQuery,
-  useGetAssignmentsQuery,
-  useEditAssignmentMutation,
-} = assignmentApi
+  useAddQuizMutation,
+  useDeleteQuizMutation,
+  useGetQuizQuery,
+  useGetQuizzesQuery,
+  useEditQuizMutation,
+} = quizzesApi

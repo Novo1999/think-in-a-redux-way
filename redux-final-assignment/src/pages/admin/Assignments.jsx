@@ -26,7 +26,7 @@ const Assignment = () => {
   if (isLoading) {
     content = (
       <tr>
-        <td>Loading videos...</td>
+        <td>Loading assignments...</td>
       </tr>
     )
   }
@@ -41,7 +41,7 @@ const Assignment = () => {
   if (!isLoading && !isError && assignments.length === 0) {
     content = (
       <tr>
-        <td>No videos</td>
+        <td>No assignments</td>
       </tr>
     )
   }
