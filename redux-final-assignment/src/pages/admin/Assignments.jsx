@@ -15,8 +15,6 @@ const Assignment = () => {
   } = useGetAssignmentsQuery()
   const [deleteAssignment] = useDeleteAssignmentMutation()
 
-  console.log(assignments)
-
   const handleDelete = (id) => {
     deleteAssignment(id)
   }
